@@ -1,0 +1,19 @@
+<div class="slider-container"
+     (touchstart)="onTouchStart($event)"
+     (touchmove)="onTouchMove($event)"
+     (touchend)="onTouchEnd()">
+
+  <div class="slider">
+    <img [src]="images[currentIndex]" alt="Slider Image" class="slide-image">
+
+    <button class="nav prev" (click)="prevSlide()" aria-label="Previous">&#10094;</button>
+    <button class="nav next" (click)="nextSlide()" aria-label="Next">&#10095;</button>
+  </div>
+
+  <div class="dots">
+    <span *ngFor="let img of images; let i = index"
+          [class.active]="i === currentIndex"
+          (click)="currentIndex = i"></span>
+  </div>
+</div>
+

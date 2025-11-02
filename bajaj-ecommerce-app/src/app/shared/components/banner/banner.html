@@ -1,0 +1,17 @@
+<section class="banner-3col">
+  <article class="box" *ngFor="let col of columns">
+    <h2 class="box-title">{{ col.heading }}</h2>
+
+    <div class="tile-grid">
+      <a class="tile" *ngFor="let t of col.tiles" [href]="t.href || '#'" aria-label="{{ t.title }}">
+        <div class="img-wrap">
+          <img [src]="t.img" [alt]="t.title" loading="lazy">
+        </div>
+        <p class="tile-title">{{ t.title }}</p>
+      </a>
+    </div>
+
+    <a class="box-cta" [href]="col.ctaHref">{{ col.ctaText }}</a>
+  </article>
+</section>
+

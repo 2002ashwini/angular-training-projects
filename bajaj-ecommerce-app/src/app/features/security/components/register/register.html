@@ -1,0 +1,71 @@
+<p>register works!</p>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 380px">
+    <div class="text-center mb-3">
+      <h4 class="fw-bold text-primary mb-2">Bajaj eCommerce Authentication</h4>
+      <p class="text-muted">Create a new account</p>
+    </div>
+
+   
+    @if (authErrorMessage != '') {
+    <div class="alert alert-danger">{{ authErrorMessage }}</div>
+    }
+
+    <form (ngSubmit)="onRegisterSubmit(registerForm)" #registerForm="ngForm">
+    
+      <div class="mb-3">
+        <label for="name" class="form-label fw-semibold">Full Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="user.name"
+          class="form-control"
+          required
+          placeholder="Enter your name"
+        />
+      </div>
+
+    
+      <div class="mb-3">
+        <label for="email" class="form-label fw-semibold">Email address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="user.email"
+          class="form-control"
+          required
+          placeholder="Enter your email"
+        />
+      </div>
+
+      
+      <div class="mb-3">
+        <label for="password" class="form-label fw-semibold">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="user.password"
+          class="form-control"
+          minlength="6"
+          required
+          placeholder="Enter password (min 6 characters)"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100" [disabled]="loading">
+        @if (!loading) { Register } @if (loading) {
+        <span class="spinner-border spinner-border-sm"></span> Registering... }
+      </button>
+
+      <div class="text-center mt-3">
+        <small class="text-muted">
+          Already have an account?
+          <a [routerLink]="['/login']" class="text-decoration-none">Login here</a>
+        </small>
+      </div>
+    </form>
+  </div>
+</div>

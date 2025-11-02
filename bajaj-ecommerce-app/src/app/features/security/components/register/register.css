@@ -1,0 +1,18 @@
+.card {
+  background: #fff;
+}
+.form-label {
+  font-weight: 500;
+}
+.btn-primary {
+  background-color: #e46f1a;
+  border-color: #e46f1a;
+}
+.btn-primary:hover {
+  background-color: #d65f0d;
+  border-color: #d65f0d;
+}
+.alert {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+}

@@ -1,0 +1,73 @@
+@if (product && product.data.length > 0) {
+<div class="container text-center">
+  <div
+    class="d-flex flex-column flex-md-row gap-2 justify-content-between align-items-md-center mb-3"
+  >
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search products (name or description)…"
+      [(ngModel)]="q"
+      (ngModelChange)="onSearchChange()"
+      aria-label="Search products"
+    />
+
+    <div class="text-muted small ms-md-3">
+      Total: <strong>{{ filtered.length }}</strong>
+      <span *ngIf="currentCategorySlug"> in “{{ currentCategorySlug }}”</span>
+    </div>
+  </div>
+
+  <div class="row">
+    @for (product of (filtered | paginate: { itemsPerPage: itemsPerPage, currentPage: page }); track
+    product._id) {
+    <div class="col-12 col-md-6 col-lg-3">
+      <div class="card shadow-lg m-3 bg-body-tertiary rounded" style="width: 100%">
+        <img
+          [src]="product.images?.[0] ?? 'assets/placeholder.png'"
+          class="card-img-top"
+          [alt]="product.name"
+          height="250"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <hr />
+
+          
+          <div class="text-center">
+            <button class="btn btn-success" (click)="onProductSelection(product._id)">
+              Show Details
+            </button>
+
+            @if (loggedIn()) {
+            <button class="btn btn-dark ms-2" (click)="addToCart(product)">Add To Cart</button>
+            } @else {
+            <button class="btn btn-outline-secondary ms-2" (click)="addToCart(product)">
+              Login to add
+            </button>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="‹"
+      nextLabel="›"
+      [autoHide]="true"
+    >
+    </pagination-controls>
+  </div>
+</div>
+
+@if (selectedProductId) {
+<bajaj-product-details [productId]="selectedProductId"></bajaj-product-details>
+} } @else {
+<h4>Sorry! We did not find any products! Please try after some time!</h4>
+}

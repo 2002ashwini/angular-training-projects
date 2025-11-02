@@ -1,0 +1,18 @@
+<div class="container my-4">
+  <h3>My Orders</h3>
+
+  <div *ngIf="loading">Loading…</div>
+  <div *ngIf="!loading && data.length === 0" class="alert alert-info">No orders yet.</div>
+
+  <div class="list-group" *ngIf="!loading && data.length">
+    <a class="list-group-item list-group-item-action" *ngFor="let o of data" (click)="open(o._id)">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">#{{ o._id }}</h6>
+        <small>{{ o.createdAt | date:'medium' }}</small>
+      </div>
+      <p class="mb-1">{{ o.items.length }} items — ₹{{ o.total }} — {{ o.status }}</p>
+      <small>Ship to: {{ o.shippingAddress?.city }}, {{ o.shippingAddress?.state }}</small>
+    </a>
+  </div>
+</div>
+

@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h3 class="mb-3 text-primary">All Categories</h3>
+
+ 
+  <div *ngIf="!loading; else loader">
+    <div class="row g-3">
+    
+      <div class="col-6 col-md-3" *ngFor="let c of categories">
+        <div
+          class="card text-center shadow-sm category-card h-100"
+          (click)="open(c)"
+          style="cursor: pointer;"
+        >
+          
+          <img
+            [src]="c.image"
+            class="card-img-top"
+            [alt]="c.name"
+            height="180"
+            style="object-fit: cover;"
+          />
+
+        
+          <div class="card-body">
+            <h6 class="card-title m-0 text-capitalize">{{ c.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ng-template #loader>
+    <div class="text-center mt-4">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-2">Loading categories...</p>
+    </div>
+  </ng-template>
+</div>
